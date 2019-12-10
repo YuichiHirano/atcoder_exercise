@@ -3,6 +3,16 @@ using namespace std;
 
 
 void solve(std::string S){
+    int len = S.size();
+    int ans =0;
+    for(int i= 0;i<len;i++){
+        if(S[i] != S[len-1-i]){
+            // cout << S[i] << S[len-1-i] << endl;
+            ans++;
+        }
+    }
+    ans /= 2;
+    cout << ans << endl;
 
 }
 

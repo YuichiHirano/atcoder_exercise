@@ -3,6 +3,11 @@ using namespace std;
 
 
 void solve(std::vector<long long> A){
+    if(A[0] + A[1] + A[2] <= 21){
+        cout << "win" << endl;
+        return;
+    }
+    cout << "bust" << endl;
 
 }
 
