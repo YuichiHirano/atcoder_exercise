@@ -5,20 +5,18 @@ using namespace std;
 void solve(long long H, long long W, std::vector<std::vector<long long>> A, std::vector<std::vector<long long>> B){
     vector<vector<int>> C(H);
 
-    long long max = 0;
     for(int i=0;i<H;i++){
         for(int j=0;j<W;j++){
             C[i].emplace_back(abs(A[i][j]-B[i][j]));
-            max += abs(C[i][j]);
         }
     }
 
 
-    
+    int max = 80 *80 * 2;
     bool dp[H+1][W+1][max];
     for(int i=0;i<H;i++){
         for(int j=0;j<W;j++){
-            for(long long k=0;k<=max;k++){
+            for(int k=0;k<max;k++){
                 dp[i][j][k] = false;
             }
         }
@@ -34,22 +32,22 @@ void solve(long long H, long long W, std::vector<std::vector<long long>> A, std:
 
     for(int i=0;i<H;i++){
         for(int j=0;j<W;j++){
-            for(long long k=0;k<=max;k++){
+            for(int k=0;k<max;k++){
                 if(dp[i][j][k]){
-                    if(i <H-1){
-                    dp[i+1][j][k+C[i+1][j]] = true;
-                    dp[i+1][j][abs(k-C[i+1][j])] = true;
+                    if(i < H-1){
+                        dp[i+1][j][k+C[i+1][j]] = true;
+                        dp[i+1][j][abs(k-C[i+1][j])] = true;
                     }
-                    if(j<W-1){
-                    dp[i][j+1][k+C[i][j+1]] = true;
-                    dp[i][j+1][abs(k-C[i][j+1])] = true;
+                    if(j < W-1){
+                        dp[i][j+1][k+C[i][j+1]] = true;
+                        dp[i][j+1][abs(k-C[i][j+1])] = true;
                     }
                 }
             }
         }
     }
 
-    for(long long k=0;k<=max;k++){
+    for(int k=0;k<=max;k++){
         if(dp[H-1][W-1][k]){
             cout << k << endl;
             return;
